@@ -11,12 +11,12 @@ O projeto tem como propósito o desenvolvimento de uma aplicação web inovadora
 ### Linguagens de Programação
 
 - ``JavaScript``
-- ``Go``
+- ``Python``
 
 ### Frameworks e Bibliotecas
 
 - ``ReactJS``
-- ``GinGonic``
+- ``FastAPI``
 
 ### Bancos de Dados
 

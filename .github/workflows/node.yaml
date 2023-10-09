@@ -33,8 +33,8 @@ jobs:
     
     runs-on: ubuntu-latest
     steps:
-    - run: ls -la
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
+    - run: cd backend
     - uses: actions/setup-python@v2
     - uses: syphar/restore-virtualenv@v1
       id: cache-virtualenv

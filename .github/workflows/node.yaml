@@ -42,7 +42,7 @@ jobs:
     - uses: syphar/restore-pip-download-cache@v1
       if: steps.cache-virtualenv.outputs.cache-hit != 'true'
 
-    - run: pip install -r requirements.txt
+    - run: cd backend && pip install -r requirements.txt
       if: steps.cache-virtualenv.outputs.cache-hit != 'true'
 
   linter:

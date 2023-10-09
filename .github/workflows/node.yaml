@@ -10,7 +10,7 @@ on:
     branches: [ "feature/pipeline" ]
 
 jobs:
-  build:
+  frontend-build: 
 
     runs-on: ubuntu-latest
 
@@ -28,3 +28,46 @@ jobs:
         name: upload frontend files
         path: |
           ./frontend/build
+  
+  create-virtualenv:
+    
+    runs-on: ubuntu-latest
+    steps:
+    - run: cd backend
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v2
+    - uses: syphar/restore-virtualenv@v1
+      id: cache-virtualenv
+
+    - uses: syphar/restore-pip-download-cache@v1
+      if: steps.cache-virtualenv.outputs.cache-hit != 'true'
+
+    - run: pip install -r requirements.txt
+      if: steps.cache-virtualenv.outputs.cache-hit != 'true'
+
+  linter:
+    needs: create-virtualenv
+    runs-on: ubuntu-latest
+    steps:
+    - run: cd backend
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v2
+    - uses: syphar/restore-virtualenv@v1
+      id: cache-virtualenv
+
+    - run: flake8
+    - run: pydocstyle
+    - run: isort . --diff --check-only
+    - run: black --check --diff .
+
+  tests:
+    needs: create-virtualenv
+    runs-on: ubuntu-latest
+    steps:
+    - run: cd backend
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v2
+    - uses: syphar/restore-virtualenv@v1
+      id: cache-virtualenv
+
+    - run: py.test

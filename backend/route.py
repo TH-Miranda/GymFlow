@@ -23,7 +23,12 @@ async def register(note: AlunoIn):
     alunos_collection_name.insert_one(query)
     return individual_serial(query)
 
-@router.delete("/delete-aluno/{name}")
+@router.delete("/delete/{name}")
+async def delete(name: str):
+    result = alunos_collection_name.delete_one({"name": name})
+    return result
+
+@router.get("/delete-aluno/{name}")
 async def delete_aluno(name: str):
     result = alunos_collection_name.delete_one({"name": name})
     return result

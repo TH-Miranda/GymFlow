@@ -46,7 +46,7 @@ const SignUp = () => {
             {passwordMatchError && (
               <Alert variant="danger">{passwordMatchError}</Alert>
             )}
-            <Form onSubmit={handleSignUp}>
+            <Form onSubmit={handleSignUp} id="signup-form">
               <Form.Group controlId="formBasicFirstName">
                 <Form.Label>Nome</Form.Label>
                 <Form.Control
@@ -101,10 +101,22 @@ const SignUp = () => {
                   required
                 />
               </Form.Group>
+              <Link to={{
+                pathname: "/additionalInfo",
+                state: {
+                  firstName: firstName,
+                  lastName: lastName,
+                  email: email,
+                  password: password,
+                  confirmPassword: confirmPassword
+                }
+              }}>
+                <Button variant="dark" type="submit" form="signup-form">
+                  Próxima página
+                </Button>
+              </Link>
 
-              <Button variant="primary" type="submit">
-                Cadastrar
-              </Button>
+              
             </Form>
             <div style={{ marginTop: '10px', textAlign: 'center' }}>
               <Link to="/">Voltar</Link>

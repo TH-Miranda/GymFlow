@@ -1,12 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import WelcomePage from "./welcomePage";
-import Home from "./Home";
+import WelcomePage from "./pages/welcomePage/index";
+import Home from "./pages/Home/index";
 import Sobre from "./Sobre";
 import Usuario from "./Usuario";
-import Login from "./login";
-import SignUp from "./signup";
+import Login from "./pages/login/index";
+import SignUp from "./pages/signup/index";
+import AdditionalInfo from "./pages/additionalInfo/index";
 
 const Router = () => {
    return(
@@ -18,6 +19,7 @@ const Router = () => {
             <Route element = { <Home /> }  path="/home" exact />
             <Route element = { <Sobre /> }  path="/sobre" />
             <Route element = { <Usuario /> }  path="/usuario" />
+            <Route element = { <AdditionalInfo /> }  path="/additionalInfo" />
        </Routes>
    )
 }

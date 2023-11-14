@@ -1,6 +1,9 @@
 from typing import List
 from pydantic import BaseModel
 
+class hours(BaseModel):
+        day: List[str]
+
 class Muscle(BaseModel):
         muscle_id: int 
         monday: List[str]

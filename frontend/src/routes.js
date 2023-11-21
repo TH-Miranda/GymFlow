@@ -8,6 +8,7 @@ import Usuario from "./Usuario";
 import Login from "./pages/login/index";
 import SignUp from "./pages/signup/index";
 import AdditionalInfo from "./pages/additionalInfo/index";
+import Schedule from "./pages/schedule/index"
 
 const Router = () => {
    return(
@@ -20,6 +21,7 @@ const Router = () => {
             <Route element = { <Sobre /> }  path="/sobre" />
             <Route element = { <Usuario /> }  path="/usuario" />
             <Route element = { <AdditionalInfo /> }  path="/additionalInfo" />
+            <Route element = { <Schedule /> } path="/schedule" />
        </Routes>
    )
 }

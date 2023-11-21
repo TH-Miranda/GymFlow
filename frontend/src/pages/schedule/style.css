@@ -1,0 +1,48 @@
+.App {
+    text-align: center;
+    padding: 50px;
+  }
+  
+  form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  button {
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .text-size {
+    font-size: 14px;
+  }
+
+  .custom-img-size {
+    width: 120px;
+    height: 80px;
+  }
+
+  .custom-card-size {
+    width: 120px;
+    height: 100px;
+  }

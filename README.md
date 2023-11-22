@@ -1,8 +1,11 @@
 # <h1 align="center"> GymFlow </h1>
 
-<p align="center">
-<img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
-</p>
+<div align="center">
+  
+![pipeline status](https://github.com/TH-Miranda/GymFlow/actions/workflows/node.yaml/badge.svg)  
+![](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
+
+</div>
 
 O projeto tem como propósito o desenvolvimento de uma aplicação web inovadora que proporcionará aos frequentadores de academias uma solução abrangente para o agendamento e gerenciamento de treinos, além da utilização de aparelhos disponíveis. A aplicação visa melhorar significativamente a experiência dos usuários, oferecendo uma plataforma de agendamento personalizado, histórico de atividades e notificações eficazes.
 

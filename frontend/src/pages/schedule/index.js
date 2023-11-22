@@ -29,16 +29,25 @@ const Schedule = () =>{
     console.log('Periodo:', periodo);
     console.log('Grupo Muscular:', grupoMuscular);
 
+    body = JSON.stringify({
+      dia,
+      periodo,
+      grupoMuscular,
+    });
+
     // Enviar os dados para a API
     try {
-      const response = await fetch(`http://localhost:8000/agendamento?dia=${dia}&periodo=${periodo}&grupo_muscular=${grupoMuscular}`);
-      const data = await response.json();
-      setMensagem(data.mensagem);
+      const response = await fetch('http://localhost:8000/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,});
     } catch (error) {
       console.error('Erro ao agendar treino:', error);
       setMensagem('Erro ao agendar treino. Por favor, tente novamente.');
-    }
-  };
+      }
+    };
 
   // TODO: caso o usuario clique em qualquer lugar da tela, o card do grupo muscular selecionado é desmarcado
   

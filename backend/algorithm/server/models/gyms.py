@@ -23,3 +23,9 @@ class Gym(BaseModel):
         gym_neighborhood: str
 
         muscle: List[Muscle]
+
+
+class RequestGym(BaseModel):
+        day: str
+        period: str
+        muscleGroup: str

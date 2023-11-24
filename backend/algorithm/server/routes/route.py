@@ -1,5 +1,6 @@
 from fastapi import APIRouter
-from models.gyms import Gym
+from fastapi import Body
+from models.gyms import Gym, RequestGym
 from config.database import gymRegisterData
 from schema.schemas import list_serial, individual_serial
 from bson import ObjectId
@@ -8,7 +9,7 @@ import numpy as np
 
 router = APIRouter()
 
-@router.get("/")
+@router.get("/aluno")
 async def get_gyms():       
         gyms = list_serial(gymRegisterData.find({"_id": ObjectId('655170c2ca2b21d600003d97'), "muscle.muscle_id": ObjectId('6546be83e38d228e409ba51e')}, {"_id": 1, "muscle": 1}))
 
@@ -62,6 +63,13 @@ async def get_gyms():
 
         print(time_range)
 
+        min = time_range['Time'][time_range['Count'].idxmin()]
+
         print(time_range['Time'][time_range['Count'].idxmin()])
 
         return count.to_json()
+
+@router.post("/horas/", response_model = RequestGym)
+async def post_gyms(note: RequestGym):
+        print(note.dict())
+        return note.dict()

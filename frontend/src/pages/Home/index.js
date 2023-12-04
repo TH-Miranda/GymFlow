@@ -18,22 +18,22 @@ const Home = () => {
           {/* Lista de opções */}
           <ul style={{ listStyle: 'none', padding: 0 }}>
             <li style={{ marginBottom: '10px' }}>
-              <a href="#" style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px' }}>
+              <a style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px' }}>
                 Meus treinos
               </a>
             </li>
             <li style={{ marginBottom: '10px' }}>
-              <a href="#" style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
+              <a style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
                 Agendar treino
               </a>
             </li>
             <li style={{ marginBottom: '10px' }}>
-              <a href="#" style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
+              <a style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
                 Rank de treino
               </a>
             </li>
             <li style={{ marginBottom: '10px' }}>
-              <a href="#" style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
+              <a style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
                 Perfil
               </a>
             </li>
@@ -45,7 +45,7 @@ const Home = () => {
               left: '20px',
               cursor: 'pointer',
             }}>
-            <a href="#" style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
+            <a style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
               Logout
             </a>   
           </div>         

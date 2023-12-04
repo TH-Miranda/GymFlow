@@ -1,15 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavbarComponent from '../../components/nav';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+
 
 const Schedule = () =>{
   const [dia, setDia] = useState('');
   const [periodo, setPeriodo] = useState('');
   const [grupoMuscular, setGrupoMuscular] = useState('');
-  const [mensagem, setMensagem] = useState('');
+  const [mensagem] = useState('');
 
   const gruposMusculares = [
     {nome: 'Torax', imagem: 'peitolas.png'},

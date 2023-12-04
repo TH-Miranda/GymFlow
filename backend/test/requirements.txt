@@ -1,4 +1,0 @@
-## TODO: Add a version of requirements.txt that is compatible with pipenv
-
-fastapi
-uvicorn

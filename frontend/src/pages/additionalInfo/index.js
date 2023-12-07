@@ -12,7 +12,7 @@ const AdditionalInfo = () => {
   const [weight, setWeight] = useState('');
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
-  const [trainingDays, setTrainingDays] = useState('');
+  const [trainingDays] = useState('');
 
   const handleAdditionalInfo = (e) => {
     e.preventDefault();
@@ -32,10 +32,6 @@ const AdditionalInfo = () => {
     } else {
       setSelectedDay([...selectedDay, day]);
     }
-  };
-
-  const handleMoveToSelected = (day) => {
-    setSelectedDay([...selectedDay, day]);
   };
 
   return (

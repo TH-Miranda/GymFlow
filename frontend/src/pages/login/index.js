@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 
 const backgroundImage = "/loginBackground.jpg"; 
 
@@ -8,11 +8,38 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     // TODO: Enviar email e senha para o backend
-    console.log('Email:', email);
-    console.log('Senha:', password);
+    const bodyResquest = JSON.stringify({
+      email,
+      password,
+    });
+
+    console.log(bodyResquest);
+
+    try {
+      const response = await fetch('http://localhost:50000/api/v1/auth/login' ,{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      if (response.ok) {
+        console.log('Login realizado com sucesso!');
+        window.location.href = '/Home'; 
+      } else {
+        console.error('Erro ao realizar login:', response.statusText);
+      }
+
+    } catch (error) {
+      console.error('Erro ao realizar login:', error);
+    };
   };
 
   return (

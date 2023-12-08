@@ -37,7 +37,7 @@ const Schedule = () =>{
 
     // Enviar os dados para a API
     try {
-      const response = await fetch('http://localhost:8000/horas', {
+      const response = await fetch('http://localhost:50000/horas', {
         method: 'POST',
         headers:{
             'Content-Type':'application/json',

@@ -1,18 +1,52 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 
 const backgroundImage = "/loginBackground.jpg"; 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginStatus, setLoginStatus] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     // TODO: Enviar email e senha para o backend
-    console.log('Email:', email);
-    console.log('Senha:', password);
+    const bodyResquest = JSON.stringify({
+      email,
+      password,
+    });
+
+    console.log(bodyResquest);
+
+    try {
+      const response = await fetch('http://localhost:50000/api/v1/auth/login' ,{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      if (response.ok) {
+        setLoginStatus('Login realizado com sucesso!');        
+        console.log('Login realizado com sucesso!');
+        setTimeout(() => {
+          window.location.href = '/Home';
+        }, 1500); 
+      } else {
+        setLoginStatus('Erro ao realizar login:', response.status);        
+        console.error('Teste:', response.status);
+      }
+
+    } catch (error) {
+      setLoginStatus('Erro ao realizar login:', error);      
+      console.log('teste:', error)
+      console.error('Erro ao realizar login:', error);
+    };
   };
 
   const backgroundImage = "/images/background.jpg";
@@ -117,6 +151,11 @@ const Login = () => {
                   Entrar
                 </Button>
               </Form>
+              {loginStatus && (
+                <div style={{ marginTop: '10px', textAlign: 'center', color: loginStatus.includes('sucesso') ? 'green' : 'red' }}>
+                  {loginStatus}
+                </div>
+              )}
               <div style={{ marginTop: '10px', textAlign: 'center' }}>
                 <Link style={{ color: '#000'}} to="/">Voltar</Link> {/* Link para voltar à página inicial */}
               </div>

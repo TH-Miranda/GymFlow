@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from fastapi import Body
+from fastapi import Body, Depends, Request
 from models.gyms import Gym, RequestGym
 from config.database import gymRegisterData
 from schema.schemas import list_serial, individual_serial
@@ -10,14 +10,38 @@ import numpy as np
 from models.auth import UserLogin, UserRegister
 from auth.login import user_login
 from auth.register import register_user
+from auth.token import validate_jwt_token
+from auth.utils import secret_key
 
-router = APIRouter(prefix="/api/v1")
+async def auth_middleware(request: Request):
+    # if url has /api/v1/auth/ prefix, then skip auth middleware
+    if request.url.path.startswith("/api/v1/auth/"):
+        return
+
+    token = request.headers.get("Authorization")
+    if not token:
+        print('debug: no token')
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    try:
+        decoded_token = validate_jwt_token(token, secret_key=secret_key())
+        print('debug: token validated')
+        print('debug: token decoded: ', decoded_token)
+
+        return
+    except Exception as e:
+        print('debug: invalid token')
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+router = APIRouter(prefix="/api/v1", dependencies=[Depends(auth_middleware)])
 
 @router.post("/auth/login")
 async def login(user: UserLogin):
-    if user_login(user.email, user.password):
-        return {"message": "Login successful"}
-    else:
+    try:
+        token = user_login(user.email, user.password)
+        return token
+    except Exception as e:
+        print("Error: ", e)
         raise HTTPException(status_code=401, detail="Unauthorized")
 
 @router.post("/auth/register")

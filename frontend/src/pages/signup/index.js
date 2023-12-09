@@ -23,6 +23,29 @@ const SignUp = () => {
     setPasswordMatchError('');
 
     // passar para api
+    try {
+      const response = fetch('http://localhost:50000/api/v1/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password,
+        }),
+      });
+
+      if (response.ok) {
+        console.log('Usuário cadastrado com sucesso!');
+      } else {
+        console.error('Erro ao cadastrar usuário:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Erro ao cadastrar usuário:', error);
+    }
+
     console.log('Nome:', firstName);
     console.log('Sobrenome:', lastName);
     console.log('Email:', email);

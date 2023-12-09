@@ -29,19 +29,29 @@ def createUser(newUser: UserRegister) -> bool:
 
     return True
 
-def readUser():
+def readUser(email: str) -> UserRegister:
     # Read a user from the gymUsers collection
     gymUsers = db["gymUsers"]
-    user = gymUsers.find_one({"name": "John Doe"})
-    print(user)
+    try:
+        user = gymUsers.find_one({"email": email})
+        return user
+    except:
+        return False
 
-def updateUser():
+def updateUser(email: str, newUser: UserRegister) -> bool:
     # Update a user in the gymUsers collection
     gymUsers = db["gymUsers"]
-    gymUsers.update_one({"name": "John Doe"}, {"$set": {"age": 26}})
+    try:
+        gymUsers.update_one({"email": email}, {"$set": {"age": 26}})
+    except:
+        print("Error updating user")
+        return False
 
-def deleteUser():
+def deleteUser(email: str):
     # Delete a user from the gymUsers collection
     gymUsers = db["gymUsers"]
-    gymUsers.delete_one({"name": "John Doe"})
-
+    try:
+        gymUsers.delete_one({"email": email})
+    except:
+        print("Error deleting user")
+        return False

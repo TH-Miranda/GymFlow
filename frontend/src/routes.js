@@ -9,6 +9,7 @@ import Login from "./pages/login/index";
 import SignUp from "./pages/signup/index";
 import AdditionalInfo from "./pages/additionalInfo/index";
 import Schedule from "./pages/schedule/index"
+import MyWorkouts from "./pages/myWorkouts/index";
 
 const Router = () => {
    return(
@@ -21,6 +22,7 @@ const Router = () => {
             <Route element = { <SignUp /> } path="/signup" />
             <Route element = { <AdditionalInfo /> } path="/additionalInfo" />
             <Route element = { <Schedule /> } path="/schedule" />
+            <Route element = { <MyWorkouts /> } path="/myWorkouts" />
        </Routes>
    )
 }

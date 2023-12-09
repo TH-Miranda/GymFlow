@@ -7,6 +7,7 @@ const backgroundImage = "/loginBackground.jpg";
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginStatus, setLoginStatus] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -31,13 +32,19 @@ const Login = () => {
       });
 
       if (response.ok) {
+        setLoginStatus('Login realizado com sucesso!');        
         console.log('Login realizado com sucesso!');
-        window.location.href = '/Home'; 
+        setTimeout(() => {
+          window.location.href = '/Home';
+        }, 1500); 
       } else {
-        console.error('Erro ao realizar login:', response.statusText);
+        setLoginStatus('Erro ao realizar login:', response.status);        
+        console.error('Teste:', response.status);
       }
 
     } catch (error) {
+      setLoginStatus('Erro ao realizar login:', error);      
+      console.log('teste:', error)
       console.error('Erro ao realizar login:', error);
     };
   };
@@ -84,12 +91,17 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                </Form.Group>
-
+                </Form.Group>           
+            
                 <Button variant="primary" type="submit">
                   Entrar
                 </Button>
               </Form>
+              {loginStatus && (
+                <div style={{ marginTop: '10px', textAlign: 'center', color: loginStatus.includes('sucesso') ? 'green' : 'red' }}>
+                  {loginStatus}
+                </div>
+              )}
               <div style={{ marginTop: '10px', textAlign: 'center' }}>
                 <Link to="/">Voltar</Link> {/* Link para voltar à página inicial */}
               </div>

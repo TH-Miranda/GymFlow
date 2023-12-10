@@ -12,6 +12,7 @@ from auth.login import user_login
 from auth.register import register_user
 from auth.token import validate_jwt_token
 from auth.utils import secret_key
+from config.database import readUser
 
 async def auth_middleware(request: Request):
     # if url has /api/v1/auth/ prefix, then skip auth middleware
@@ -51,6 +52,23 @@ async def register(user: UserRegister):
     else:
         # TODO: Return a more specific error message
         raise HTTPException(status_code=400, detail="User already exists")
+
+@router.get("/user/profile")
+async def get_profile(request: Request):
+    # get email from token
+    token = request.headers.get("Authorization")
+    decoded_token = validate_jwt_token(token, secret_key=secret_key())
+    decoded_token_email = decoded_token["email"]
+
+    # get user from database
+    user = readUser(decoded_token_email)
+    print('debug: user: ', user)
+
+    # convert user to UserProfile
+    from models.user import UserProfile
+    user_profile = UserProfile(**user)
+
+    return user_profile
 
 @router.post("/auth/token/refresh")
 async def refresh_token(user: str = Body(...), password: str = Body(...)):

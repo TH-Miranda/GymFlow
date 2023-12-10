@@ -24,15 +24,16 @@ def user_login(email, password) -> bool:
     user = readUser(email)
 
     if user:
-        # TODO: validate user's password
-        try:
-            token = generate_jwt_token({"email": email}, secret_key=secret_key())
-        except Exception as e:
-            print("Error: ", e)
-            raise Exception("Internal error")
-        print("token generated: ", token)
+        # check if password is correct
+        if user.password == password:
+            try:
+                token = generate_jwt_token({"email": email}, secret_key=secret_key())
+            except Exception as e:
+                print("Error: ", e)
+                raise Exception("Internal error")
+            print("token generated: ", token)
 
-        return token
-    else:
-        print("Invalid email or password")
-        raise Exception("Invalid email or password")
+            return token
+
+    print("Invalid email or password")
+    raise Exception("Invalid email or password")

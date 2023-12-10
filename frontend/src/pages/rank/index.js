@@ -1,4 +1,6 @@
+// TrainingRankingPage.jsx
 import React from 'react';
+import './style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
@@ -7,8 +9,14 @@ import { faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
+const TrainingRankingPage = () => {
+  const trainingData = [
+    { userName: 'João', score: 1000 },
+    { userName: 'Maria', score: 900 },
+    { userName: 'Carlos', score: 800 },
+    // Adicione mais usuários conforme necessário
+  ];
 
-const Home = () => {
   return (
     <div style={{ display: 'flex', height: '100vh' }}>
       {/* Barra lateral */}
@@ -39,12 +47,12 @@ const Home = () => {
               </a>
             </li>
             <li style={{ marginBottom: '10px' }}>
-              <a href="/rank" style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
+              <a href="/meus_treinos" style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
               <FontAwesomeIcon icon={faTrophy} style={{ marginRight: '5px', width: '2em' }} />Rank de treino
               </a>
             </li>
             <li style={{ marginBottom: '10px' }}>
-              <a href="/userProfile" style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
+              <a href="/meus_treinos" style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
               <FontAwesomeIcon icon={faUser} style={{ marginRight: '5px', width: '2em' }} />Perfil
               </a>
             </li>
@@ -67,11 +75,32 @@ const Home = () => {
 
       {/* Conteúdo principal */}
       <div style={{ flex: 1, padding: '20px' }}>
-        <h1>Home</h1>
-        <p>Seja bem-vindo(a) ao sistema de treinos da Academia!</p>
+      <div className="page-container">
+      <div className="content-container">
+        <h1>Ranking de Treino</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Colocação</th>
+              <th>Usuário</th>
+              <th>Pontuação</th>
+            </tr>
+          </thead>
+          <tbody>
+            {trainingData.map((user, index) => (
+              <tr key={index} className={user.userName === 'João' ? 'current-user' : ''}>
+                <td>{index + 1}</td>
+                <td>{user.userName}</td>
+                <td>{user.score}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default TrainingRankingPage;

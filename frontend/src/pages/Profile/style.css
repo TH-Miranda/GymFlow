@@ -1,0 +1,161 @@
+/* UserProfilePage.css */
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .content-container {
+    width: 50%;
+    text-align: left;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1, h2 {
+    color: #333;
+  }
+  
+  .user-info {
+    margin-top: 20px;
+  }
+  
+  .favorite-gyms {
+    margin-top: 30px;
+  }
+  
+  .favorite-gyms ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .favorite-gyms li {
+    margin-bottom: 8px;
+  }
+  
+  /* UserProfilePage.css */
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .content-container {
+    width: 50%;
+    text-align: left;
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1, h2 {
+    color: #343a40;
+  }
+  
+  .user-info {
+    margin-top: 20px;
+  }
+  
+  .user-info p {
+    margin-bottom: 10px;
+  }
+  
+  .favorite-gyms {
+    margin-top: 30px;
+  }
+  
+  .favorite-gyms ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .favorite-gyms li {
+    margin-bottom: 8px;
+  }
+  
+  .edit-buttons {
+    margin-top: 20px;
+  }
+  
+  .edit-buttons button {
+    margin-right: 10px;
+  }
+  
+  .change-password-form {
+    margin-top: 20px;
+  }
+  
+  .change-password-form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .change-password-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .change-password-form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .change-password-form
+    .change-password-form button:hover {
+        background-color: #0069d9;
+    }
+    
+    /* UserProfilePage.css */
+
+/* ... (regras CSS anteriores) */
+
+.edit-input {
+    padding: 8px;
+    margin: 4px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  .edit-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .change-password-form {
+    margin-top: 20px;
+  }
+  
+  .change-password-form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .change-password-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  .change-password-form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* ... (regras CSS adicionais, se necessário) */
+  

@@ -67,7 +67,7 @@ const SideBar = () => {
 
       {/* Conteúdo principal */}
       <div style={{ flex: 1, padding: '20px' }}>
-        {/* Seu conteúdo principal aqui */}
+            
       </div>
     </div>
   );

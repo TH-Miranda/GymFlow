@@ -10,6 +10,8 @@ import SignUp from "./pages/signup/index";
 import AdditionalInfo from "./pages/additionalInfo/index";
 import Schedule from "./pages/schedule/index"
 import MyWorkouts from "./pages/myWorkouts/index";
+import RankPage from "./pages/rank";
+import UserProfilePage from "./pages/Profile";
 
 const Router = () => {
    return(
@@ -23,6 +25,8 @@ const Router = () => {
             <Route element = { <AdditionalInfo /> } path="/additionalInfo" />
             <Route element = { <Schedule /> } path="/schedule" />
             <Route element = { <MyWorkouts /> } path="/myWorkouts" />
+            <Route element = { <RankPage /> } path="/rank" />
+            <Route element = { <UserProfilePage /> } path="/userProfile" />
        </Routes>
    )
 }

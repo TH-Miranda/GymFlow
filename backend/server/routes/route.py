@@ -71,7 +71,7 @@ async def get_profile(request: Request):
 
     return user_profile
 
-@router.post("/user/profile")
+@router.put("/user/profile")
 async def set_profile(request: Request, user: UserProfile):
     # get email from token
     token = request.headers.get("Authorization")

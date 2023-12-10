@@ -13,7 +13,7 @@ from auth.token import validate_jwt_token
 from auth.utils import secret_key
 from config.database import readUser, updateUser
 from models.auth import UserLogin, UserRegister
-from models.user import UserProfile
+from models.user import UserProfile, UserPasswordUpdate
 
 async def auth_middleware(request: Request):
     # if url has /api/v1/auth/ prefix, then skip auth middleware
@@ -86,6 +86,28 @@ async def set_profile(request: Request, user: UserProfile):
         raise HTTPException(status_code=400, detail="Error updating user")
 
     return {"message": "Profile updated successfully"}
+
+@router.put("/user/password")
+async def set_password(request: Request, user_password: UserPasswordUpdate):
+    # get email from token
+    token = request.headers.get("Authorization")
+    decoded_token = validate_jwt_token(token, secret_key=secret_key())
+    decoded_token_email = decoded_token["email"]
+
+    # validate current password
+    user = readUser(decoded_token_email)
+    if user.password != user_password.current_password:
+        raise HTTPException(status_code=400, detail="Incorrect password")
+
+    # update password
+    user.password = user_password.new_password
+    try:
+        updateUser(decoded_token_email, user)
+        print("Password updated successfully")
+    except:
+        raise HTTPException(status_code=400, detail="Error updating password")
+
+    return {"message": "Profile page"}
 
 @router.post("/auth/token/refresh")
 async def refresh_token(user: str = Body(...), password: str = Body(...)):

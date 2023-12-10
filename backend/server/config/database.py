@@ -34,7 +34,7 @@ def readUser(email: str) -> UserRegister:
     gymUsers = db["gymUsers"]
     try:
         user = gymUsers.find_one({"email": email})
-        return user
+        return UserRegister(**user)
     except:
         return False
 

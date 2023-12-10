@@ -22,6 +22,12 @@ def createUser(newUser: UserRegister) -> bool:
         print("Error connecting to the database")
         return False
 
+    # check if user already exists
+    user = readUser(newUser.email)
+    if user:
+        print("User already exists")
+        raise Exception("User already exists")
+
     user_dict = vars(newUser)  # Convert UserRegister object to dictionary
 
     userID = gymUsers.insert_one(user_dict)

@@ -34,7 +34,7 @@ def readUser(email: str) -> UserRegister:
     gymUsers = db["gymUsers"]
     try:
         user = gymUsers.find_one({"email": email})
-        return user
+        return UserRegister(**user)
     except:
         return False
 
@@ -42,9 +42,10 @@ def updateUser(email: str, newUser: UserRegister) -> bool:
     # Update a user in the gymUsers collection
     gymUsers = db["gymUsers"]
     try:
-        gymUsers.update_one({"email": email}, {"$set": {"age": 26}})
+        # use newUser to update user
+        gymUsers.update_one({"email": email}, {"$set": vars(newUser)})
     except:
-        print("Error updating user")
+        print("debug: error updating user")
         return False
 
 def deleteUser(email: str):

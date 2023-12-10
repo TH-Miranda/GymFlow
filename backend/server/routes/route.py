@@ -7,12 +7,13 @@ from bson import ObjectId
 import pandas as pd
 import numpy as np
 
-from models.auth import UserLogin, UserRegister
 from auth.login import user_login
 from auth.register import register_user
 from auth.token import validate_jwt_token
 from auth.utils import secret_key
-from config.database import readUser
+from config.database import readUser, updateUser
+from models.auth import UserLogin, UserRegister
+from models.user import UserProfile
 
 async def auth_middleware(request: Request):
     # if url has /api/v1/auth/ prefix, then skip auth middleware
@@ -69,6 +70,22 @@ async def get_profile(request: Request):
     user_profile = UserProfile(**user)
 
     return user_profile
+
+@router.post("/user/profile")
+async def set_profile(request: Request, user: UserProfile):
+    # get email from token
+    token = request.headers.get("Authorization")
+    decoded_token = validate_jwt_token(token, secret_key=secret_key())
+    decoded_token_email = decoded_token["email"]
+
+    # get user from database
+    try:
+        updateUser(decoded_token_email, user)
+        print("User updated successfully")
+    except:
+        raise HTTPException(status_code=400, detail="Error updating user")
+
+    return {"message": "Profile updated successfully"}
 
 @router.post("/auth/token/refresh")
 async def refresh_token(user: str = Body(...), password: str = Body(...)):

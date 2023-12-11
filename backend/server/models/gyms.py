@@ -35,3 +35,9 @@ class ScheduleDays(BaseModel):
     friday: List[str]
     saturday: List[str]
     sunday: List[str]
+
+class ScheduleTraining(BaseModel):
+    gym_name: str
+    day: str
+    day_period: str
+    muscle_group: str

@@ -44,13 +44,14 @@ const UserProfilePage = () => {
         if (response.ok) {
           const userDataFromServer = await response.json();
           setUserData(new UserData(
-            userDataFromServer.firstName,
-            userDataFromServer.lastName,
+            userDataFromServer.first_name,
+            userDataFromServer.second_name,
             userDataFromServer.age,
             userDataFromServer.height,
             userDataFromServer.weight,
             userDataFromServer.gender
           ));
+          console.log(userData);
         } else {
           console.error('Erro ao carregar dados do usuário:', response.status);
         }
@@ -71,13 +72,21 @@ const UserProfilePage = () => {
 
     try {
       const token = localStorage.getItem('token');
+      const body = JSON.stringify({
+        'first_name': userData.firstName,
+        'second_name': userData.lastName,
+        'age': userData.age,
+        'height': userData.height,
+        'weight': userData.weight,
+        'gender': 'male'
+      });
       const response = await fetch('http://localhost:50000/api/v1/user/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify(userData),
+        body: body,
       });
 
       if (response.ok) {
@@ -132,13 +141,13 @@ const UserProfilePage = () => {
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
+    <div style={{ background: 'images/background.jpg', display: 'flex', height: '100vh' }}>
       {/* Barra lateral */}
-      <div style={{ width: 'flex', backgroundColor: 'black', color: 'white', padding: '10px' }}>
+      <div style={{ width: 'flex', backgroundColor: 'black', color: 'white', padding: '10px', position: 'fixed', top: 0, left: 0, zIndex: 1, height:'100%' }}>
         <div style={{ padding: '20px' }}>
           {/* Avatar do usuário (substitua o src pelo seu caminho) */}
           <img
-            src="https://file.rendit.io/n/DsdAo7ATZAUNQObf6xge.svg"
+            src="/images/avatar.svg"
             alt="Avatar"
             style={{ width: '150px', height: '150px', marginBottom: '40px' }}
           />
@@ -158,11 +167,6 @@ const UserProfilePage = () => {
             <li style={{ marginBottom: '10px' }}>
               <a href="/Schedule" style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px' }}>
                 <FontAwesomeIcon icon={faCalendarAlt} style={{ marginRight: '5px', width: '2em' }} />Agendar treino
-              </a>
-            </li>
-            <li style={{ marginBottom: '10px' }}>
-              <a href="/meus_treinos" style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px' }}>
-                <FontAwesomeIcon icon={faTrophy} style={{ marginRight: '5px', width: '2em' }} />Rank de treino
               </a>
             </li>
             <li style={{ marginBottom: '10px' }}>
@@ -194,7 +198,6 @@ const UserProfilePage = () => {
             <h1>{`Olá, ${userData.firstName}`}</h1>
             <div className="user-info">
               <p><strong>Nome:</strong> {isEditing ? <input type="text" name="firstName" value={userData.firstName} onChange={(e) => setUserData({ ...userData, firstName: e.target.value })} /> : userData.firstName} {isEditing ? <input type="text" name="lastName" value={userData.lastName} onChange={(e) => setUserData({ ...userData, lastName: e.target.value })} /> : userData.lastName}</p>
-              <p><strong>Email:</strong> {isEditing ? <input type="text" name="email" value={userData.email} onChange={(e) => setUserData({ ...userData, email: e.target.value })} /> : userData.email}</p>
               <p><strong>Idade:</strong> {isEditing ? <input type="number" name="age" value={userData.age} onChange={(e) => setUserData({ ...userData, age: e.target.value })} /> : userData.age} anos</p>
               <p><strong>Peso:</strong> {isEditing ? <input type="number" name="weight" value={userData.weight} onChange={(e) => setUserData({ ...userData, weight: e.target.value })} /> : userData.weight} kg</p>
               <p><strong>Altura:</strong> {isEditing ? <input type="number" name="height" value={userData.height} onChange={(e) => setUserData({ ...userData, height: e.target.value })} /> : userData.height} cm</p>

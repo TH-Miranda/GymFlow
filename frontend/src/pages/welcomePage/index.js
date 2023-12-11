@@ -17,6 +17,9 @@ const WelcomePage = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        top: 0,
+        left: 0,
+        zIndex: 1
       }}
     >
       <div className="position-absolute p-3 mb-2 bg-black top-10 start-50 translate-middle rounded-circle">

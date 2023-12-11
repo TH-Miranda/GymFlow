@@ -25,7 +25,7 @@ def user_login(email, password) -> bool:
 
     if user:
         # check if password is correct
-        if user.password == password:
+        if user['password'] == password:
             try:
                 token = generate_jwt_token({"email": email}, secret_key=secret_key())
             except Exception as e:

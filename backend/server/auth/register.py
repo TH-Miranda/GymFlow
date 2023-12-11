@@ -1,4 +1,4 @@
-from config.database import createUser
+from view.user import createUser
 
 from models.auth import UserRegister
 

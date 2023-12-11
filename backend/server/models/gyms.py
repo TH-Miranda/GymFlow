@@ -5,7 +5,7 @@ class hours(BaseModel):
     day: List[str]
 
 class Muscle(BaseModel):
-    muscle_id: int
+    muscle_name: str
     monday: List[str]
     tuesday: List[str]
     wednesday: List[str]
@@ -14,9 +14,7 @@ class Muscle(BaseModel):
     saturday: List[str]
     sunday: List[str]
 
-
 class Gym(BaseModel):
-    _id: int
     gym_name: str
     gym_address: str
     gym_number_address: int
@@ -24,8 +22,16 @@ class Gym(BaseModel):
 
     muscle: List[Muscle]
 
-
 class RequestGym(BaseModel):
     day: str
     period: str
     muscleGroup: str
+
+class ScheduleDays(BaseModel):
+    monday: List[str]
+    tuesday: List[str]
+    wednesday: List[str]
+    thursday: List[str]
+    friday: List[str]
+    saturday: List[str]
+    sunday: List[str]

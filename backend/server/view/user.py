@@ -1,18 +1,5 @@
-import os
-from pymongo import MongoClient
-
 from models.auth import UserRegister
-
-# Get the MongoDB URI from the environment variable
-mongo_uri = os.environ.get("MONGO_URI")
-
-# Connect to the MongoDB server
-client = MongoClient(mongo_uri)
-
-db = client.gymData
-
-gymRegisterData = db["gymRegisterData"]
-muscleData = db["muscleData"]
+from view.database import db
 
 def createUser(newUser: UserRegister) -> bool:
     # Insert a new user in the gymUsers collection
@@ -40,7 +27,7 @@ def readUser(email: str) -> UserRegister:
     gymUsers = db["gymUsers"]
     try:
         user = gymUsers.find_one({"email": email})
-        return UserRegister(**user)
+        return user
     except:
         return False
 

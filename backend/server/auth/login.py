@@ -4,7 +4,7 @@ import jwt
 
 from auth.token import generate_jwt_token, Token
 from models.auth import UserLogin
-from config.database import readUser
+from view.user import readUser
 from auth.utils import secret_key
 
 def validate_user(user: UserLogin) -> bool:

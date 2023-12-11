@@ -115,16 +115,18 @@ async def set_password(request: Request, user_password: UserPasswordUpdate):
 async def refresh_token(user: str = Body(...), password: str = Body(...)):
     return {"user": user, "password": password}
 
+from models.gyms import ScheduleTraining
+
 @router.post("/schedule")
-async def schedule_date(gym_name: str, day: str, day_period: str, muscle_group: str):
+async def schedule_date(scheduleTraining: ScheduleTraining):
     from utils.algorithm import algorithm
     # TODO: get all hours from datbase given the gym_name, day, day_period and muscle_group
     from view.gym import scheduleGym
-    schedule = scheduleGym(gym_name, muscle_group)
-    schedule_day = schedule[day]
+    schedule = scheduleGym(scheduleTraining.gym_name, scheduleTraining.muscle_group)
+    schedule_day = schedule[scheduleTraining.day]
 
     # TODO: use the algorithm to get the best time to go to the gym
-    bestTime = algorithm(schedule_day, day_period)
+    bestTime = algorithm(schedule_day, scheduleTraining.day_period)
     # convert bestTime to string
     bestTime = str(bestTime)
 

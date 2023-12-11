@@ -120,10 +120,10 @@ async def schedule_date(gym_name: str, day: str, day_period: str, muscle_group: 
     pass
 
 @router.get("/schedule")
-async def get_schedule(gym_name: str, day: str, day_period: str, muscle_group: str):
+async def get_schedule(gym_name: str, muscle_group: str):
     try:
         from view.gym import scheduleGym
-        schedule = scheduleGym(gym_name, muscle_group, day, day_period)
+        schedule = scheduleGym(gym_name, muscle_group)
         from models.gyms import ScheduleDays
         ret = ScheduleDays(**schedule)
     except Exception as e:

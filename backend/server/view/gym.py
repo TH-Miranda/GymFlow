@@ -14,7 +14,7 @@ def getGyms():
     except:
         raise Exception("Error getting gyms")
 
-def scheduleGym(gym_name: str, muscle_group: str, day: str, day_period: str):
+def scheduleGym(gym_name: str, muscle_group: str):
     muscle_id = None
     try:
         # Get the muscle_id by its name
@@ -47,7 +47,6 @@ def scheduleGym(gym_name: str, muscle_group: str, day: str, day_period: str):
                         # check if muscle['muscle_id'] contains muscle_id
                         print(f"Found matching muscle_id in gym: {gym_name}")
                         # Your additional code for processing the matching muscle goes here
-                        print('debug: muscle on day: ', muscle[day])
 
                         # get all fields apart from muscle_id
                         ret = {key: value for key, value in muscle.items() if key != 'muscle_id'}

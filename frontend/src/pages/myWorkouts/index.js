@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import './style.css';
 import SideBar from "../../components/sideBar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,6 +10,43 @@ import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 const MyWorkouts = () => {
+
+    const firstName = "Lucas";
+    const lastName = "Silva";
+
+
+    // eslint-disable-next-line no-undef
+    useEffect(() => {
+        // handleInformation();
+    }, []);
+    const handleInformation = async (e) => {
+        e.preventDefault();
+
+        const bodyResquest = JSON.stringify({
+            firstName: firstName,
+            lastName: lastName,
+        });
+
+        try {
+            const response = await fetch('http://localhost:50000/api/v1/auth/login' ,{
+                method: 'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                },
+                body: bodyResquest
+            });
+
+            if (response.ok) {
+                
+            } else {
+                
+            }
+
+        } catch (error) {
+            
+        };
+    };
+
     return (
         <div style={{ display: 'flex', height: '100vh' }}>
       {/* Barra lateral */}

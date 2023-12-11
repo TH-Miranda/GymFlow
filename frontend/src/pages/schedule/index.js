@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -44,7 +44,7 @@ const Schedule = () =>{
 
     // Enviar os dados para a API
     try {
-      const response = await fetch('http://localhost:50000/horas', {
+      const response = await fetch('http://localhost:50000/api/v1/schedule', {
         method: 'POST',
         headers:{
             'Content-Type':'application/json',
@@ -62,6 +62,7 @@ const Schedule = () =>{
       console.error('Erro ao agendar treino:', error);
     };
   };
+  
   // TODO: caso o usuario clique em qualquer lugar da tela, o card do grupo muscular selecionado é desmarcado
   
 
@@ -121,48 +122,39 @@ const Schedule = () =>{
         </div>
       </div>
 
-      {/* Conteúdo principal */}
       <div style={{ flex: 1, padding: '20px' }}>
-      <div className="container mt-5">
-      <h1 className="mb-4 text-center">Agendamento de Treino</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="academia" className="form-label">Academia:</label>
-          <select className="form-select" id="academia" required>
-            <option value="academia1">Academia 1</option>
-            <option value="academia2">Academia 2</option>
-            <option value="academia3">Academia 3</option>
-          </select>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="dia" className="form-label">Escolha a Data:</label>
-          <input type="date" className="form-control" id="dia" value={dia} onChange={(e) => setDia(e.target.value)} required />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="periodo" className="form-label">Período do Dia:</label>
-          <select className="form-select" id="periodo" value={periodo} onChange={(e) => setPeriodo(e.target.value)} required>
-            <option value="manha">Manhã</option>
-            <option value="tarde">Tarde</option>
-            <option value="noite">Noite</option>
-          </select>
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Escolha o Grupo Muscular:</label>
-          <div className="d-flex flex-wrap justify-content-center">
-            {gruposMusculares.map((grupo) => (
-              <div key={grupo.nome} className={`card mb-3 mx-2 ${grupoMuscular === grupo.nome ? 'selected' : ''}`} onClick={() => setGrupoMuscular(grupo.nome)}>
-                <img src={`/images/${grupo.imagem}`} className="card-img-top" alt={grupo.nome} />
-                <div className="card-body text-center">
-                  <h5 className="card-title text-size">{grupo.nome}</h5>
+        <div className="container mt-5">
+          <h1 className="mb-4 text-center">Agendamento de Treino</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="dia" className="form-label">Escolha a Data:</label>
+              <input type="date" className="form-control" id="dia" value={dia} onChange={(e) => setDia(e.target.value)} required />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="periodo" className="form-label">Período do Dia:</label>
+              <select className="form-select" id="periodo" value={periodo} onChange={(e) => setPeriodo(e.target.value)} required>
+                <option value="manha">Manhã</option>
+                <option value="tarde">Tarde</option>
+                <option value="noite">Noite</option>
+              </select>
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Escolha o Grupo Muscular:</label>
+              <div className="d-flex flex-wrap justify-content-center">
+                {gruposMusculares.map((grupo) => (
+                <div key={grupo.nome} className={`card mb-3 mx-2 ${grupoMuscular === grupo.nome ? 'selected' : ''}`} onClick={() => setGrupoMuscular(grupo.nome)}>
+                  <img src={`/images/${grupo.imagem}`} className="card-img-top" alt={grupo.nome} />
+                  <div className="card-body text-center">
+                    <h5 className="card-title text-size">{grupo.nome}</h5>
+                  </div>
                 </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-        <button type="submit" className="btn btn-primary">Agendar Treino</button>
-      </form>
-      {mensagem && <p className="mt-3 alert alert-success">{mensagem}</p>}
-    </div> 
+            </div>
+            <button type="submit" className="btn btn-primary">Agendar Treino</button>
+          </form>
+          {mensagem && <p className="mt-3 alert alert-success">{mensagem}</p>}
+        </div> 
       </div>
     </div>
     );

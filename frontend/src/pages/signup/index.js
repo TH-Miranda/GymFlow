@@ -10,6 +10,10 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMatchError, setPasswordMatchError] = useState('');
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('');
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -30,19 +34,29 @@ const SignUp = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          password,
+          'email': email,
+          'password': password,
+          'first_name': firstName,
+          'second_name': lastName,
+          'height': height,
+          'weight': weight,
+          'age': age,
+          'gender': gender,
         }),
       });
 
-      if (response.ok) {
+      if ((await response).status === 200) {
+        alert('Usuário cadastrado com sucesso!');
+        setTimeout(() => {
+          window.location.href = '/login';
+        }, 1500);
         console.log('Usuário cadastrado com sucesso!');
       } else {
+        alert('Erro ao cadastrar usuário!');
         console.error('Erro ao cadastrar usuário:', response.statusText);
       }
     } catch (error) {
+      alert('Erro ao cadastrar usuário!');
       console.error('Erro ao cadastrar usuário:', error);
     }
 
@@ -51,33 +65,10 @@ const SignUp = () => {
     console.log('Email:', email);
     console.log('Senha:', password);
     console.log('Confirmação de Senha:', confirmPassword);
-
-    const bodyResquest = JSON.stringify({
-      email: email,
-      password: password,
-      first_name: firstName,
-      second_name: lastName
-    });
-
-    // Enviar os dados para a API
-    try {
-      const response = await fetch('http://localhost:50000/api/v1/auth/register', {
-        method: 'POST',
-        headers:{
-            'Content-Type':'application/json',
-        },
-        body: bodyResquest
-      });
-
-        if (response.ok) {
-          console.log('Registro completo com sucesso!');
-        } else {
-          console.error('Erro ao registrar usuario:', response.statusText);
-        }
-
-    } catch (error) {
-      console.error('Erro ao registrar usuario:', error);
-    };
+    console.log('Altura:', height);
+    console.log('Peso:', weight);
+    console.log('Idade:', age);
+    console.log('gender:', gender)
 
   };
 
@@ -137,110 +128,166 @@ const SignUp = () => {
       <Container>
         <Row className="justify-content-center">
           <Col md={6}>
-            <div
-              style={boxRegisterStyle}
-            >
-              <h2 style={titleStyle}>Cadastro</h2>
-              {passwordMatchError && (
-                <Alert variant="danger">{passwordMatchError}</Alert>
-              )}
-              <Form onSubmit={handleSignUp} id="signup-form">
-                <Form.Group controlId="formBasicFirstName">
-                  <Form.Label
-                  style={labelStyle}>
-                    Nome
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Digite seu nome"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                    style={customInputStyle}
-                  />
-                </Form.Group>
+              <div
+                style={boxRegisterStyle}
+              >
+                <h2 style={titleStyle}>Cadastro</h2>
+                {passwordMatchError && (
+                  <Alert variant="danger">{passwordMatchError}</Alert>
+                )}
+                <Form onSubmit={handleSignUp} id="signup-form">
+                  <Form.Group controlId="formBasicFirstName">
+                    <Form.Label
+                    style={labelStyle}>
+                      Nome
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Digite seu nome"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      required
+                      style={customInputStyle}
+                    />
+                  </Form.Group>
 
-                <Form.Group controlId="formBasicLastName">
-                  <Form.Label
-                  style={labelStyle}>
-                    Sobrenome
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Digite seu sobrenome"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                    style={customInputStyle}
-                  />
-                </Form.Group>
+                  <Form.Group controlId="formBasicLastName">
+                    <Form.Label
+                    style={labelStyle}>
+                      Sobrenome
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Digite seu sobrenome"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      required
+                      style={customInputStyle}
+                    />
+                  </Form.Group>
 
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label
-                  style={labelStyle}>
-                    Email
-                  </Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Digite seu email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    style={customInputStyle}
-                  />
-                </Form.Group>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label
+                    style={labelStyle}>
+                      Email
+                    </Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="Digite seu email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      style={customInputStyle}
+                    />
+                  </Form.Group>
 
-                <Form.Group controlId="formBasicPassword">
-                  <Form.Label
-                  style={labelStyle}>
-                    Senha
-                  </Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Digite sua senha"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    style={customInputStyle}
-                  />
-                </Form.Group>
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label
+                    style={labelStyle}>
+                      Senha
+                    </Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Digite sua senha"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      style={customInputStyle}
+                    />
+                  </Form.Group>
 
-                <Form.Group controlId="formBasicConfirmPassword">
-                  <Form.Label 
-                  style={labelStyle} >
-                    Confirmação de Senha
-                  </Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Confirme sua senha"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                    style={customInputStyle}
-                  />
-                </Form.Group>
-                <Link to={{
-                  pathname: "/additionalInfo",
-                  state: {
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
-                    password: password,
-                    confirmPassword: confirmPassword
-                  }
-                }}>
-                  <Button variant="dark" type="submit" className="w-100" form="signup-form" 
-                  style={customButtonStyle}>
-                    Próxima página
-                  </Button>
-                </Link>
-
-                
-              </Form>
-              <div style={{ marginTop: '13px', textAlign: 'center', }}>
-                <Link style={{ color: '#000'}} to="/">Voltar</Link>
+                  <Form.Group controlId="formBasicConfirmPassword">
+                    <Form.Label 
+                    style={labelStyle} >
+                      Confirmação de Senha
+                    </Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Confirme sua senha"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                      style={customInputStyle}
+                    />
+                  </Form.Group>                                     
+                </Form>
               </div>
-            </div>
+
+              <div
+                style={boxRegisterStyle}
+              >
+                <h2 
+                style={titleStyle}
+                >Informações Adicionais</h2>
+                <Form onSubmit={handleSignUp}>
+                  <Form.Group controlId="formBasicHeight">
+                    <Form.Label
+                      style={labelStyle}
+                    >Altura (cm)</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Digite sua altura"
+                      value={height}
+                      onChange={(e) => setHeight(e.target.value)}
+                      required
+                      style={customInputStyle}
+                    />
+                  </Form.Group>
+
+                  <Form.Group controlId="formBasicWeight">
+                    <Form.Label
+                      style={labelStyle}
+                    >Peso (kg)</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Digite seu peso"
+                      value={weight}
+                      onChange={(e) => setWeight(e.target.value)}
+                      required
+                      style={customInputStyle}
+                    />
+                  </Form.Group>
+
+                  <Form.Group controlId="formBasicAge">
+                    <Form.Label
+                      style={labelStyle}
+                    >Idade</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Digite sua idade"
+                      value={age}
+                      onChange={(e) => setAge(e.target.value)}
+                      required
+                      style={customInputStyle}
+                    />
+                  </Form.Group>
+
+                  <Form.Group controlId="formBasicGender">
+                    <Form.Label
+                      style={labelStyle}
+                    >Sexo</Form.Label>
+                    <Form.Control
+                      as="select"
+                      value={gender}
+                      onChange={(e) => setGender(e.target.value)}
+                      required
+                      style={customInputStyle}
+                    >
+                      <option value="">Selecione</option>
+                      <option value="male">Masculino</option>
+                      <option value="female">Feminino</option>
+                      <option value="other">Outro</option>
+                    </Form.Control>
+                  </Form.Group>
+
+                  <Button variant="primary" type="submit" style={customButtonStyle}>
+                    Salvar
+                  </Button>
+                </Form>
+                <div style={{ marginTop: '10px', textAlign: 'center' }}>
+                  <Link to="/">Voltar</Link>
+              </div>
+              </div>
           </Col>
         </Row>
       </Container>

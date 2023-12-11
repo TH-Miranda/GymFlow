@@ -7,7 +7,6 @@ import Sobre from "./Sobre";
 import Usuario from "./Usuario";
 import Login from "./pages/login/index";
 import SignUp from "./pages/signup/index";
-import AdditionalInfo from "./pages/additionalInfo/index";
 import Schedule from "./pages/schedule/index"
 import MyWorkouts from "./pages/myWorkouts/index";
 import RankPage from "./pages/rank";
@@ -22,7 +21,6 @@ const Router = () => {
             <Route element = { <Usuario /> } path="/usuario" />
             <Route element = { <Login /> } path="/login" />
             <Route element = { <SignUp /> } path="/signup" />
-            <Route element = { <AdditionalInfo /> } path="/additionalInfo" />
             <Route element = { <Schedule /> } path="/schedule" />
             <Route element = { <MyWorkouts /> } path="/myWorkouts" />
             <Route element = { <RankPage /> } path="/rank" />

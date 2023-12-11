@@ -117,7 +117,28 @@ async def refresh_token(user: str = Body(...), password: str = Body(...)):
 
 @router.post("/schedule")
 async def schedule_date(gym_name: str, day: str, day_period: str, muscle_group: str):
-    pass
+    from utils.algorithm import algorithm
+    # TODO: get all hours from datbase given the gym_name, day, day_period and muscle_group
+    from view.gym import scheduleGym
+    schedule = scheduleGym(gym_name, muscle_group)
+    schedule_day = schedule[day]
+
+    # TODO: use the algorithm to get the best time to go to the gym
+    bestTime = algorithm(schedule_day, day_period)
+    # convert bestTime to string
+    bestTime = str(bestTime)
+
+    return bestTime
+
+    # TODO: save the best time to go to the gym in the database
+    try:
+        from view.gym import scheduleTraining
+        scheduleTraining(gym_name, muscle_group, day, day_period, bestTime)
+        return {"message": "Schedule saved successfully"}
+    except Exception as e:
+        print('debug: error saving schedule')
+        print('debug: error: ', e)
+        raise HTTPException(status_code=400, detail="Error saving schedule")
 
 @router.get("/schedule")
 async def get_schedule(gym_name: str, muscle_group: str):

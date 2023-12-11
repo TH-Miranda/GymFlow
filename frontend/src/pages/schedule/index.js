@@ -68,7 +68,8 @@ const Schedule = () =>{
   
   const customButtonStyle = {
     backgroundColor: '#5fafd0',
-    marginTop: '40px',
+    marginTop: '20px',
+    marginBottom: '40px',
     borderRadius: '8px', 
     color: '#f9fafa',
     fontSize: '20px',
@@ -79,7 +80,7 @@ const Schedule = () =>{
     return (
       <div style={{ display: 'flex', height: '100vh' }}>
       {/* Barra lateral */}
-      <div style={{ width: 'flex', backgroundColor: 'black', color: 'white', padding: '10px', position: 'fixed', height: '100%', zIndex: 1}}>
+      <div style={{ width: 'flex', backgroundColor: 'black', color: 'white', padding: '10px', position: 'fixed', top: 0, left: 0, height: '100%', zIndex: 1}}>
         <div style={{ padding: '20px' }}>
           {/* Avatar do usuário (substitua o src pelo seu caminho) */}
           <img
@@ -133,7 +134,7 @@ const Schedule = () =>{
       </div>
 
       {/* Conteúdo principal */}
-      <div style={{ flex: 1, marginLeft: '300px', marginRight: '10px', padding: '20px', zIndex: 0, overflowY: 'auto' }}>
+      <div style={{ flex: 1, marginLeft: '300px', marginRight: '10px', top: 0, padding: '20px', zIndex: 0 }}>
       <div className="container mt-5">
       <h1 className="mb-4 text-center">Agendamento de Treino</h1>
       <form onSubmit={handleSubmit}>
@@ -171,7 +172,6 @@ const Schedule = () =>{
                   <img src={grupo.imagem} className="card-img-top" alt={grupo.nome} />
                   <div className="card-body text-center">
                     <h5 className="card-title text-size">{grupo.nome}</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">lorem</h6>
                   </div>
                 </div>
               </Col>

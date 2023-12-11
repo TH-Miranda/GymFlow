@@ -1,4 +1,5 @@
 import React from 'react';
+import "./style.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
@@ -67,10 +68,103 @@ const Home = () => {
 
       {/* Conteúdo principal */}
       <div style={{ flex: 1, padding: '20px' }}>
-        <h1>Home</h1>
-        <p>Seja bem-vindo(a) ao sistema de treinos da Academia!</p>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"></link>
+        <div class="container bootdey">
+          <div class="col-md-12 bootstrap snippets">
+            <div class="panel">
+              <div class="panel-body">
+                <textarea class="form-control" rows="2" placeholder="What are you thinking?"></textarea>
+                <div class="mar-top clearfix">
+                  <button class="btn btn-sm btn-primary pull-right" type="submit"><i class="fa fa-pencil fa-fw"></i> Share</button>
+                  <a class="btn btn-trans btn-icon fa fa-video-camera add-tooltip" href="#"></a>
+                  <a class="btn btn-trans btn-icon fa fa-camera add-tooltip" href="#"></a>
+                  <a class="btn btn-trans btn-icon fa fa-file add-tooltip" href="#"></a>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-body">
+                <div class="media-block">
+                  <a class="media-left" href="#"><img class="img-circle img-sm" alt="Profile Picture" src="https://bootdey.com/img/Content/avatar/avatar1.png"/></a>
+                  <div class="media-body">
+                    <div class="mar-btm">
+                      <a href="#" class="btn-link text-semibold media-heading box-inline">Lisa D.</a>
+                      <p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> - From Mobile - 11 min ago</p>
+                    </div>
+                    <p>consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+                    <div class="pad-ver">
+                      <div class="btn-group">
+                        <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a>
+                        <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a>
+                      </div>
+                      <a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
+                    </div>
+
+                    <div>
+                      <div class="media-block">
+                        <a class="media-left" href="#"><img class="img-circle img-sm" alt="Profile Picture" src="https://bootdey.com/img/Content/avatar/avatar2.png"/></a>
+                        <div class="media-body">
+                          <div class="mar-btm">
+                            <a href="#" class="btn-link text-semibold media-heading box-inline">Bobby Marz</a>
+                            <p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> - From Mobile - 7 min ago</p>
+                          </div>
+                          <p>Good!</p>
+                          <div class="pad-ver">
+                            <div class="btn-group">
+                              <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i> You Like It</a>
+                              <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a>
+                            </div>
+                            <a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="media-block">
+                        <a class="media-left" href="#"><img class="img-circle img-sm" alt="Profile Picture" src="https://bootdey.com/img/Content/avatar/avatar3.png"/></a>
+                        <div class="media-body">
+                          <div class="mar-btm">
+                            <a href="#" class="btn-link text-semibold media-heading box-inline">Carl P.</a>
+                            <p class="text-muted text-sm"><i class="fa fa-globe fa-lg"></i> - From Web - 3 min ago</p>
+                          </div>
+                          <p>Hi Lisa, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod.</p>
+                          <div class="pad-ver">
+                            <div class="btn-group">
+                              <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a>
+                              <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a>
+                            </div>
+                            <a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="media-block pad-all">
+                  <a class="media-left" href="#"><img class="img-circle img-sm" alt="Profile Picture" src="https://bootdey.com/img/Content/avatar/avatar4.png"/></a>
+                  <div class="media-body">
+                    <div class="mar-btm">
+                      <a href="#" class="btn-link text-semibold media-heading box-inline">Anthony K.</a>
+                      <p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> - From Mobile - 3 min ago</p>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod.</p>
+                    <img class="img-responsive thumbnail" src="https://bootdey.com/image/400x300" alt="Image"/>
+                    <div class="pad-ver">
+                      <span class ="tag tag-sm"><i class="fa fa-heart text-danger"></i>250 likes</span>
+                      <div class="btn-group">
+                        <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a>
+                        <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a>
+                      </div>
+                      <a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
   );
 };
 

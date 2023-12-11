@@ -16,7 +16,6 @@ const Login = () => {
       email,
       password,
     });
-
     console.log(bodyResquest);
 
     try {
@@ -30,6 +29,9 @@ const Login = () => {
           password,
         }),
       });
+
+      const data = await response.json();
+      localStorage.setItem('token', data.access_token);
 
       if (response.ok) {
         setLoginStatus('Login realizado com sucesso!');        
@@ -47,6 +49,8 @@ const Login = () => {
       console.log('teste:', error)
       console.error('Erro ao realizar login:', error);
     };
+    console.log('Email:', email);
+    console.log('Senha:', password);
   };
 
   const backgroundImage = "/images/background.jpg";
@@ -151,11 +155,6 @@ const Login = () => {
                   Entrar
                 </Button>
               </Form>
-              {loginStatus && (
-                <div style={{ marginTop: '10px', textAlign: 'center', color: loginStatus.includes('sucesso') ? 'green' : 'red' }}>
-                  {loginStatus}
-                </div>
-              )}
               <div style={{ marginTop: '10px', textAlign: 'center' }}>
                 <Link style={{ color: '#000'}} to="/">Voltar</Link> {/* Link para voltar à página inicial */}
               </div>

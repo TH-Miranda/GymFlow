@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ListGroup } from 'react-bootstrap';
 import './style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faDumbbell, faCalendarAlt, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
@@ -91,8 +92,8 @@ const MyWorkouts = () => {
             </div>
 
             {/* Conteúdo principal */}
-            <div style={{ flex: 1, padding: '20px', marginLeft: '250px' }}>
-                <h2 style={{ marginBottom: '3em', marginLeft: '8em' }}>Meus treinos</h2>
+            <div style={{ flex: 1, marginLeft: '300px', marginRight: '10px', top: 0, padding: '20px', zIndex: 0 }}>
+                <h1 className="mb-5 text-center" style={{ marginBottom: '3em'}}>Meus treinos</h1>
                 <div class="container">
                     <div class="row">
                         {Object.keys(workouts).map((day, index) => (
@@ -104,8 +105,11 @@ const MyWorkouts = () => {
                                     <div class="card-body pt-0">
                                         <div class="widget-49">
                                             {workouts[day].map((workout, i) => (
-                                                <ol class="widget-49-meeting-points" key={i}>
-                                                    <li class="widget-49-meeting-item"><span>{workout}</span></li>
+                                                <ol class="widget-49-meeting-points d-flex align-items-center py-2" key={i}>
+                                                    <li class="widget-49-meeting-item">
+                                                        <span class="bullet bg-dark"></span>
+                                                        <span>{workout}</span>
+                                                    </li>
                                                 </ol>
                                             ))}
                                         </div>

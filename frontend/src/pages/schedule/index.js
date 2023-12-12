@@ -133,7 +133,7 @@ const Schedule = () =>{
 
       {/* Conteúdo principal */}
       <div style={{ flex: 1, marginLeft: '300px', marginRight: '10px', top: 0, padding: '20px', zIndex: 0 }}>
-      <div className="container mt-5">
+      <div className="container">
       <h1 className="mb-4 text-center">Agendamento de Treino</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3 text-center mx-auto" style={{ width: '300px' }}>

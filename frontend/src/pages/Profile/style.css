@@ -13,10 +13,16 @@
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   
   h1, h2 {
     color: #333;
+    display: inline-block;
+    max-width: 350px;
   }
   
   .user-info {
@@ -51,6 +57,8 @@
     background-color: #f8f9fa;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    border-radius: 10px;
   }
   
   h1, h2 {
@@ -59,10 +67,18 @@
   
   .user-info {
     margin-top: 20px;
+    margin-left: 15px;
+    align-self: flex-start;
   }
   
   .user-info p {
     margin-bottom: 10px;
+    color: #343a40;
+    font-size: 16px;
+  }
+
+  .user-info strong {
+    font-size: 17px;
   }
   
   .favorite-gyms {
@@ -80,10 +96,19 @@
   
   .edit-buttons {
     margin-top: 20px;
+    margin-left: 15px;
+    align-self: flex-start;
   }
   
   .edit-buttons button {
     margin-right: 10px;
+    background-color: #5fafd0;
+    color: #f9fafa
+  }
+
+  .change-password-form button {
+    background-color: #5fafd0;
+    color: #f9fafa
   }
   
   .change-password-form {
@@ -102,17 +127,20 @@
   }
   
   .change-password-form button {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #5fafd0;
+    color: #f9fafa;
     padding: 8px 16px;
     border: none;
     cursor: pointer;
   }
   
-  .change-password-form
-    .change-password-form button:hover {
-        background-color: #0069d9;
-    }
+  .change-password-form button:hover {
+    background-color: #0069d9;
+  }
+
+  button:hover {
+    background-color: #0069d9;
+  }
     
     /* UserProfilePage.css */
 
@@ -133,11 +161,14 @@
   
   .change-password-form {
     margin-top: 20px;
+    margin-left: 0px;
   }
   
   .change-password-form label {
     display: block;
     margin-bottom: 10px;
+    color: #343a40;
+    font-size: 17px;
   }
   
   .change-password-form input {
@@ -145,12 +176,12 @@
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ced4da;
-    border-radius: 4px;
+    border-radius: 5px;
   }
   
   .change-password-form button {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #5fafd0;
+    color: #f9fafa;
     padding: 8px 16px;
     border: none;
     border-radius: 4px;

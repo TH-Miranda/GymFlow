@@ -192,10 +192,10 @@ const UserProfilePage = () => {
       </div>
 
       {/* Conteúdo principal */}
-      <div style={{ flex: 1, padding: '20px' }}>
+      <div className='mx-auto' style={{ flex: 1, paddingLeft: '200px'}}>
         <div className="page-container">
           <div className="content-container">
-            <h1>{`Olá, ${userData.firstName}`}</h1>
+            <h1 >{`Olá, ${userData.firstName}`}</h1>
             <div className="user-info">
               <p><strong>Nome:</strong> {isEditing ? <input type="text" name="firstName" value={userData.firstName} onChange={(e) => setUserData({ ...userData, firstName: e.target.value })} /> : userData.firstName} {isEditing ? <input type="text" name="lastName" value={userData.lastName} onChange={(e) => setUserData({ ...userData, lastName: e.target.value })} /> : userData.lastName}</p>
               <p><strong>Idade:</strong> {isEditing ? <input type="number" name="age" value={userData.age} onChange={(e) => setUserData({ ...userData, age: e.target.value })} /> : userData.age} anos</p>

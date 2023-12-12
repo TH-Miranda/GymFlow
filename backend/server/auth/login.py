@@ -4,7 +4,7 @@ import jwt
 
 from auth.token import generate_jwt_token, Token
 from models.auth import UserLogin
-from config.database import readUser
+from view.user import readUser
 from auth.utils import secret_key
 
 def validate_user(user: UserLogin) -> bool:
@@ -25,7 +25,7 @@ def user_login(email, password) -> bool:
 
     if user:
         # check if password is correct
-        if user.password == password:
+        if user['password'] == password:
             try:
                 token = generate_jwt_token({"email": email}, secret_key=secret_key())
             except Exception as e:

@@ -295,11 +295,15 @@ body{
 
 .widget-49 .widget-49-meeting-points .widget-49-meeting-item {
   display: list-item;
-  color: #727686;
+  color: #bad3c2;
+  font-size: 18px;
+  font-weight: bold;
+  list-style-type: disc
 }
 
 .widget-49 .widget-49-meeting-points .widget-49-meeting-item span {
   margin-left: .5rem;
+  color: #5fafd0
 }
 
 .widget-49 .widget-49-meeting-action {

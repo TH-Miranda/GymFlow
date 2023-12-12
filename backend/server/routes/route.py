@@ -1,8 +1,5 @@
 from fastapi import APIRouter, HTTPException
 from fastapi import Body, Depends, Request
-from models.gyms import Gym, RequestGym
-from config.database import gymRegisterData
-from schema.schemas import list_serial, individual_serial
 from bson import ObjectId
 import pandas as pd
 import numpy as np
@@ -11,9 +8,12 @@ from auth.login import user_login
 from auth.register import register_user
 from auth.token import validate_jwt_token
 from auth.utils import secret_key
-from config.database import readUser, updateUser
 from models.auth import UserLogin, UserRegister
+from models.gyms import Gym, RequestGym
 from models.user import UserProfile, UserPasswordUpdate
+from schema.schemas import list_serial, individual_serial
+from view.gym import getGyms
+from view.user import readUser, updateUser
 
 async def auth_middleware(request: Request):
     # if url has /api/v1/auth/ prefix, then skip auth middleware
@@ -30,7 +30,6 @@ async def auth_middleware(request: Request):
         print('debug: token validated')
         print('debug: token decoded: ', decoded_token)
 
-        return
     except Exception as e:
         print('debug: invalid token')
         raise HTTPException(status_code=401, detail="Unauthorized")
@@ -65,9 +64,12 @@ async def get_profile(request: Request):
     user = readUser(decoded_token_email)
     print('debug: user: ', user)
 
-    # convert user to UserProfile
-    from models.user import UserProfile
-    user_profile = UserProfile(**user)
+    try:
+        # convert userRegister object to UserProfile object
+        user_profile = UserProfile(**user)
+    except Exception as e:
+        print("Error: ", e)
+        raise HTTPException(status_code=400, detail="Error getting user profile")
 
     return user_profile
 
@@ -113,67 +115,60 @@ async def set_password(request: Request, user_password: UserPasswordUpdate):
 async def refresh_token(user: str = Body(...), password: str = Body(...)):
     return {"user": user, "password": password}
 
-@router.get("/aluno")
-async def get_gyms():
-    gyms = list_serial(gymRegisterData.find({"_id": ObjectId('655170c2ca2b21d600003d97'), "muscle.muscle_id": ObjectId('6546be83e38d228e409ba51e')}, {"_id": 1, "muscle": 1}))
+from models.gyms import ScheduleTraining
 
-    # o algoritmo vai utilizar dos horarios do periodo requisitado para o musculo requisitado
-    # para isso eh necessario utilizar os dados do frontend
+@router.post("/schedule")
+async def schedule_date(scheduleTraining: ScheduleTraining):
+    from utils.algorithm import algorithm
+    # TODO: get all hours from datbase given the gym_name, day, day_period and muscle_group
+    from view.gym import scheduleGym
+    schedule = scheduleGym(scheduleTraining.gym_name, scheduleTraining.muscle_group)
+    schedule_day = schedule[scheduleTraining.day]
 
-    count = 0
+    # TODO: use the algorithm to get the best time to go to the gym
+    bestTime = algorithm(schedule_day, scheduleTraining.day_period)
+    # convert bestTime to string
+    bestTime = str(bestTime)
 
-    for muscle in gyms[0]["muscle"]:
-            if muscle["muscle_id"] == "6546be83e38d228e409ba51e":
-                    hours = muscle["tuesday"]
+    return bestTime
 
+    # TODO: save the best time to go to the gym in the database
+    try:
+        from view.gym import scheduleTraining
+        scheduleTraining(gym_name, muscle_group, day, day_period, bestTime)
+        return {"message": "Schedule saved successfully"}
+    except Exception as e:
+        print('debug: error saving schedule')
+        print('debug: error: ', e)
+        raise HTTPException(status_code=400, detail="Error saving schedule")
 
-    # Create a DataFrame with hours
-    df = pd.DataFrame(hours, columns = ['Hours']) 
-
-    print(df)
-
-    # Count the occurrences of each hour
-    count = df['Hours'].value_counts().sort_index()
-
-    print(count["06:20"])
-
-    # Create an empty DataFrame
-    time_range = pd.DataFrame()
-
-    # Create a DatetimeIndex with the desired range
-    time_range['date'] = pd.date_range(start='6:00', end='12:00', freq='20min')
-
-    # Create a time column from the 'date' column
-    time_range['Time'] = time_range['date'].dt.time
-
-    # Create the 'Count' column
-    time_range['Count'] = pd.DataFrame(data=count).notnull()
-
-    # Replace NaN values with 0
-    time_range['Count'] = time_range['Count'].replace(np.nan, 0)
+@router.get("/schedule")
+async def get_schedule(gym_name: str, muscle_group: str):
+    try:
+        from view.gym import scheduleGym
+        schedule = scheduleGym(gym_name, muscle_group)
+        from models.gyms import ScheduleDays
+        ret = ScheduleDays(**schedule)
+    except Exception as e:
+        print('debug: error getting schedule')
+        print('debug: error: ', e)
+        raise HTTPException(status_code=400, detail="Error getting schedule")
     
-    # Algorithm
-    for dfHour in count.index:
-        horas = f'{dfHour}:00'
-        for hour in time_range['Time'].index:
-            if str(time_range['Time'][hour]) == horas:
-                time_range.loc[[hour], ['Count']] = count[dfHour]
+    return ret
 
-    # Create a DataFrame with the time range
-    time = pd.DataFrame({'Time': time_range['Time']})
+@router.get("/gyms")
+async def get_gyms():
+    try:
+        gyms = getGyms()
+    except:
+        print('debug: error getting gyms')
+        raise HTTPException(status_code=400, detail="Error getting gyms")
+    
+    return gyms
 
-    # Output the DataFrame
-    print(time_range['Time'])
-
-    print(time_range)
-
-    min = time_range['Time'][time_range['Count'].idxmin()]
-
-    print(time_range['Time'][time_range['Count'].idxmin()])
-
-    return count.to_json()
-
-@router.post("/horas/", response_model = RequestGym)
-async def post_gyms(note: RequestGym):
-    print(note.dict())
-    return note.dict()
+# TODO: implement /api/v1/gym endpoint
+'''
+@router.gpost("gym")
+async def gym(request: Request):
+    return "Gym page"
+'''

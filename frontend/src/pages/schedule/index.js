@@ -36,19 +36,22 @@ const Schedule = () =>{
     console.log('Grupo Muscular:', grupoMuscular);
 
     const bodyResquest = JSON.stringify({
-      day:dia,
-      period:periodo,
-      muscleGroup:grupoMuscular
+      gym_name:'Golds Gym',
+      day:'monday',
+      day_period:'morning',
+      muscle_group:grupoMuscular
     });
 
     console.log(bodyResquest);
 
     // Enviar os dados para a API
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:50000/api/v1/schedule', {
         method: 'POST',
         headers:{
             'Content-Type':'application/json',
+            'Authorization': `Bearer ${token}`,
         },
         body: bodyResquest
       });
@@ -84,7 +87,7 @@ const Schedule = () =>{
         <div style={{ padding: '20px' }}>
           {/* Avatar do usuário (substitua o src pelo seu caminho) */}
           <img
-            src="https://file.rendit.io/n/DsdAo7ATZAUNQObf6xge.svg"
+            src="/images/avatar.svg"
             alt="Avatar"
             style={{ width: '150px', height: '150px', marginBottom: '40px' }}
           />
@@ -107,12 +110,7 @@ const Schedule = () =>{
               </a>
             </li>
             <li style={{ marginBottom: '10px' }}>
-              <a href="/meus_treinos" style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
-              <FontAwesomeIcon icon={faTrophy} style={{ marginRight: '5px', width: '2em' }} />Rank de treino
-              </a>
-            </li>
-            <li style={{ marginBottom: '10px' }}>
-              <a href="/meus_treinos" style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
+              <a href="/userProfile" style={{ textDecoration: 'none', color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '25px'}}>
               <FontAwesomeIcon icon={faUser} style={{ marginRight: '5px', width: '2em' }} />Perfil
               </a>
             </li>
@@ -135,7 +133,7 @@ const Schedule = () =>{
 
       {/* Conteúdo principal */}
       <div style={{ flex: 1, marginLeft: '300px', marginRight: '10px', top: 0, padding: '20px', zIndex: 0 }}>
-      <div className="container mt-5">
+      <div className="container">
       <h1 className="mb-4 text-center">Agendamento de Treino</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3 text-center mx-auto" style={{ width: '300px' }}>
